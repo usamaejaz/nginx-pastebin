@@ -1,0 +1,11 @@
+header {
+    padding-bottom: 0 !important;
+}
+footer a {
+    text-decoration: underline;
+}
+
+input#url {
+    width: 100%;
+    max-width: 600px;
+}

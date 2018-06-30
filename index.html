@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PasteBin by Usama Ejaz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+
+<body>
+  <header class="section">
+    <div class="container">
+      <h1 class="title">
+        PasteBin for Text
+      </h1>
+      <p class="subtitle">
+        A simple NGINX+LUA based pastebin service
+      </p>
+    </div>
+  </header>
+  <main class="section">
+    <div class="container">
+      <form method="POST" action="/api/pastes" id="form-paste">
+        <div class="field">
+          <div class="control">
+            <textarea id="content" class="textarea" placeholder="enter text here" rows="10"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button class="button" type="submit" id="submit-btn">Create Paste</button>
+            <input type="text" class="input is-inline is-invisible" readonly id="url" onclick="this.select()" />
+          </div>
+        </div>
+        <div class="notification is-invisible" id="notification">
+          <p class="has-text-dark">Pastes are deleted after 24hrs.</p>
+        </div>
+      </form>
+    </div>
+  </main>
+  <footer class="footer has-text-dark">
+    <div class="content has-text-centered">
+      <p>
+        A demo NGINX + LUA based pastebin by
+        <a class="has-text-dark" href="https://usamaejaz.com">Usama Ejaz</a> | Source Code on
+        <a class="has-text-dark" href="https://github.com/usamaejaz/nginx-pastebin">GitHub</a>
+      </p>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./assets/site.js"></script>
+</body>
+
+</html>
