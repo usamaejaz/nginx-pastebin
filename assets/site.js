@@ -1,6 +1,8 @@
 // @ts-ignore
 jQuery(function($) {
     var sending = false;
+    var $copyBtn = $("#copy-btn");
+    
     $("#form-paste").on("submit", function() {
         if (sending) return false;
         var $submitBtn = $("#submit-btn");
@@ -19,6 +21,7 @@ jQuery(function($) {
                 $("#url")
                     .val("")
                     .addClass("is-invisible");
+                $copyBtn.addClass("is-invisible");
             },
             success: function(res) {
                 $submitBtn.removeClass("is-loading is-disabled");
@@ -27,8 +30,9 @@ jQuery(function($) {
                 } else if (res.indexOf("http") === 0) {
                     $form[0].reset();
                     $("#url")
-                        .val(res)
+                        .val(res.trim())
                         .removeClass("is-invisible").focus();
+                    $copyBtn.removeClass("is-invisible");
                     $("#notification").removeClass("is-invisible");
                 }
             },
@@ -40,5 +44,27 @@ jQuery(function($) {
             sending = false;
         });
         return false;
+    });
+
+    // Copy to clipboard functionality
+    $copyBtn.on("click", function() {
+        var url = $("#url").val();
+        if (!url) return;
+        
+        navigator.clipboard.writeText(url).then(function() {
+            var originalText = $copyBtn.text();
+            $copyBtn.text("✓ Copied!");
+            setTimeout(function() {
+                $copyBtn.text(originalText);
+            }, 2000);
+        }).catch(function() {
+            // Fallback for older browsers
+            $("#url").select();
+            document.execCommand("copy");
+            $copyBtn.text("✓ Copied!");
+            setTimeout(function() {
+                $copyBtn.text("📋 Copy");
+            }, 2000);
+        });
     });
 });
